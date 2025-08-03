@@ -1,0 +1,67 @@
+{
+  "name": "friendship-quiz-app",
+  "version": "1.0.0",
+  "description": "A comprehensive friendship quiz web application built for Friendship Day celebrations with backend API support",
+  "main": "frontend/index.html",
+  "scripts": {
+    "start": "npm run start:backend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:functions": "cd functions && npm install",
+    "setup": "npm run install:all && cd backend && cp .env.example .env",
+    "deploy:netlify": "cd frontend && netlify deploy --prod --dir .",
+    "deploy:render": "echo 'Push to GitHub and deploy via Render dashboard'",
+    "deploy:both": "npm run deploy:netlify && npm run deploy:render",
+    "netlify:install": "npm install -g netlify-cli",
+    "netlify:login": "netlify login",
+    "netlify:status": "cd frontend && netlify status",
+    "firebase:init": "firebase init",
+    "firebase:serve": "firebase serve",
+    "firebase:deploy": "firebase deploy",
+    "firebase:deploy:hosting": "firebase deploy --only hosting",
+    "firebase:deploy:functions": "firebase deploy --only functions",
+    "firebase:install": "npm install -g firebase-tools",
+    "firebase:login": "firebase login",
+    "firebase:setup": "npm run install:all && npm run install:functions",
+    "test": "echo 'Tests to be implemented'",
+    "lint": "echo 'Linting to be implemented'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/friendship-quiz-app.git"
+  },
+  "keywords": [
+    "friendship",
+    "quiz",
+    "web-app",
+    "javascript",
+    "node.js",
+    "express",
+    "mongodb",
+    "social-sharing",
+    "authentication",
+    "responsive-design",
+    "fullstack"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/friendship-quiz-app/issues"
+  },
+  "homepage": "https://github.com/yourusername/friendship-quiz-app#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

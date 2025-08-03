@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Quiz - Test Your Friendship!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo"><i class="fas fa-heart"></i> FriendshipQuiz</h1>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link" onclick="showSection('home')">Home</a>
+                <a href="#create" class="nav-link" onclick="checkLoginForCreate()">Create Quiz</a>
+                <a href="#dashboard" class="nav-link" onclick="checkLoginForDashboard()">Dashboard</a>
+                <div id="authSection">
+                    <button class="btn btn-secondary" onclick="showLoginModal()" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="btn btn-primary" onclick="showRegisterModal()" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                    <div id="userInfo" style="display: none;">
+                        <span id="welcomeUser"></span>
+                        <button class="btn btn-secondary" onclick="logout()" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="hero">
+                <h1>🎉 Happy Friendship Day! 🎉</h1>
+                <p>Test how well your friends know you with personalized quizzes!</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="checkLoginForCreate()">
+                        <i class="fas fa-plus"></i> Create Your Quiz
+                    </button>
+                    <button class="btn btn-secondary" onclick="showTakeQuizModal()">
+                        <i class="fas fa-play"></i> Take a Quiz
+                    </button>
+                </div>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> 
+                    Create an account to make quizzes • No login needed to take quizzes
+                </p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Create Questions</h3>
+                    <p>Design personalized questions about yourself</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-share-alt"></i>
+                    <h3>Share with Friends</h3>
+                    <p>Send quiz links to your best friends</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>See Results</h3>
+                    <p>View friendship scores and share on social media</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Quiz Section -->
+    <section id="create" class="section">
+        <div class="container">
+            <h2><i class="fas fa-magic"></i> Create Your Friendship Quiz</h2>
+            
+            <div class="quiz-form">
+                <div class="form-group">
+                    <label for="creatorName">Your Name:</label>
+                    <input type="text" id="creatorName" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quizTitle">Quiz Title:</label>
+                    <input type="text" id="quizTitle" placeholder="How well do you know [Your Name]?" required>
+                </div>
+                
+                <div id="questionsContainer">
+                    <h3>Questions <span class="question-counter">(0/10 max)</span></h3>
+                    <!-- Questions will be added here dynamically -->
+                </div>
+                
+                <button class="btn btn-secondary" onclick="addQuestion()" id="addQuestionBtn">
+                    <i class="fas fa-plus"></i> Add Question
+                </button>
+                
+                <button class="btn btn-success" onclick="showAIQuestionModal()" id="aiQuestionBtn" style="margin-left: 0.5rem;">
+                    <i class="fas fa-robot"></i> Generate with AI
+                </button>
+                
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="saveQuiz()" id="saveQuizBtn">
+                        <i class="fas fa-save"></i> Save Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Take Quiz Section -->
+    <section id="takeQuiz" class="section">
+        <div class="container">
+            <div id="quizContent">
+                <!-- Quiz content will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <h2><i class="fas fa-tachometer-alt"></i> Your Dashboard</h2>
+            <div id="dashboardContent">
+                <div class="dashboard-empty">
+                    <i class="fas fa-chart-line"></i>
+                    <p>No quizzes created yet. <a href="#" onclick="showSection('create')">Create your first quiz!</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Take Quiz Modal -->
+    <div id="takeQuizModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTakeQuizModal()">&times;</span>
+            <h3>Enter Quiz Code</h3>
+            <input type="text" id="quizCode" placeholder="Enter the quiz code shared by your friend">
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="loadQuizByCode()">Start Quiz</button>
+                <button class="btn btn-secondary" onclick="closeTakeQuizModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResultsModal()">&times;</span>
+            <div id="resultsContent">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeLoginModal()">Cancel</button>
+                </div>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? 
+                <a href="#" onclick="closeLoginModal(); showRegisterModal();">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h3><i class="fas fa-user-plus"></i> Register</h3>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" minlength="6" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeRegisterModal()">Cancel</button>
+                </div>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? 
+                <a href="#" onclick="closeRegisterModal(); showLoginModal();">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Quiz Code Success Modal -->
+    <div id="quizCodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeQuizCodeModal()">&times;</span>
+            <div id="quizCodeContent">
+                <!-- Quiz code content will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Results Modal -->
+    <div id="detailResultsModal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close" onclick="closeDetailResultsModal()">&times;</span>
+            <div id="detailResultsContent">
+                <!-- Detailed results content will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Question Generator Modal -->
+    <div id="aiQuestionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAIQuestionModal()">&times;</span>
+            <h3><i class="fas fa-robot"></i> AI Question Generator</h3>
+            <div class="form-group">
+                <label for="aiTopic">What topic should the question be about?</label>
+                <input type="text" id="aiTopic" placeholder="e.g., favorite food, hobbies, childhood memory, dream destination" required>
+            </div>
+            <div class="form-group">
+                <label for="aiPersonName">Your name (for personalization):</label>
+                <input type="text" id="aiPersonName" placeholder="Enter your name">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="generateAIQuestion()">
+                    <i class="fas fa-magic"></i> Generate Question
+                </button>
+                <button class="btn btn-secondary" onclick="closeAIQuestionModal()">Cancel</button>
+            </div>
+            <div id="aiQuestionResult" style="margin-top: 1rem; display: none;">
+                <!-- Generated question will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Generator Modal -->
+    <div id="certificateModal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close" onclick="closeCertificateModal()">&times;</span>
+            <h3><i class="fas fa-certificate"></i> Friendship Certificate Generator</h3>
+            
+            <div id="certificatePreview">
+                <canvas id="certificateCanvas" width="800" height="600" style="max-width: 100%; border: 2px solid #ddd; border-radius: 10px;"></canvas>
+            </div>
+            
+            <div class="certificate-controls" style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label>Certificate Style:</label>
+                    <select id="certificateStyle" onchange="updateCertificatePreview()">
+                        <option value="elegant">Elegant Gold</option>
+                        <option value="modern">Modern Gradient</option>
+                        <option value="classic">Classic Blue</option>
+                        <option value="friendship">Friendship Pink</option>
+                        <option value="celebration">Celebration Purple</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-success" onclick="downloadCertificate()">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </button>
+                    <button class="btn btn-primary" onclick="shareCertificateWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                    </button>
+                    <button class="btn btn-info" onclick="shareCertificateLinkedIn()">
+                        <i class="fab fa-linkedin"></i> Share on LinkedIn
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareCertificateInstagram()">
+                        <i class="fab fa-instagram"></i> Instagram Story
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeCertificateModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Name Input Modal -->
+    <div id="nameInputModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeNameInputModal()">&times;</span>
+            <h3><i class="fas fa-user"></i> Enter Your Name</h3>
+            <p>Please enter your name to submit your quiz results:</p>
+            <div class="form-group">
+                <input type="text" id="respondentNameInput" placeholder="Enter your full name" required>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="submitWithName()">
+                    <i class="fas fa-check"></i> Submit Quiz
+                </button>
+                <button class="btn btn-secondary" onclick="closeNameInputModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Attribution -->
+    <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 1rem; margin-top: 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="margin: 0; font-size: 0.9rem;">
+                <i class="fas fa-heart" style="color: #ff6b6b;"></i> 
+                Developed with love by <strong>Tibker Tutor</strong> 
+                <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+            </p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem; opacity: 0.8;">
+                © 2025 All Rights Reserved to Tibker Tutor | Friendship Quiz App
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "friendship-quiz-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Friendship Quiz App - A friendship quiz web application for Friendship Day celebrations",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s . -l 3000",
+    "dev": "serve -s . -l 3000",
+    "build": "echo 'No build process required for static frontend'",
+    "preview": "serve -s . -l 3000",
+    "deploy": "netlify deploy --prod --dir .",
+    "deploy:preview": "netlify deploy --dir .",
+    "netlify:login": "netlify login",
+    "netlify:status": "netlify status",
+    "netlify:init": "netlify init"
+  },
+  "keywords": [
+    "friendship",
+    "quiz",
+    "frontend",
+    "html",
+    "css",
+    "javascript",
+    "netlify"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "homepage": "https://friendship-quiz-app.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/friendship-quiz-app.git"
+  }
+}
