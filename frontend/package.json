@@ -7,12 +7,7 @@
     "start": "serve -s . -l 3000",
     "dev": "serve -s . -l 3000",
     "build": "echo 'No build process required for static frontend'",
-    "preview": "serve -s . -l 3000",
-    "deploy": "netlify deploy --prod --dir .",
-    "deploy:preview": "netlify deploy --dir .",
-    "netlify:login": "netlify login",
-    "netlify:status": "netlify status",
-    "netlify:init": "netlify init"
+    "preview": "serve -s . -l 3000"
   },
   "keywords": [
     "friendship",
@@ -21,23 +16,20 @@
     "html",
     "css",
     "javascript",
-    "netlify"
+    "vercel"
   ],
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
     "serve": "^14.2.0"
   },
-  "devDependencies": {
-    "netlify-cli": "^17.0.0"
-  },
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
   },
-  "homepage": "https://friendship-quiz-app.netlify.app",
+  "homepage": "https://friendship-quiz-app.vercel.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/friendship-quiz-app.git"
+    "url": "git+https://github.com/suniaraviraj9107/Friendship.git"
   }
 }

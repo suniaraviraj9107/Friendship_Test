@@ -16,10 +16,10 @@ app.use(cors({
   origin: [
     'http://localhost:3000', 
     'http://127.0.0.1:5500',
-    'https://friendship-quiz-app.netlify.app',  // Your Netlify URL
-    'https://main--friendship-quiz-app.netlify.app',  // Netlify preview URL
-    /\.netlify\.app$/  // Any Netlify subdomain
-  ],
+    'https://localhost:3000',
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+    /\.vercel\.app$/  // Any Vercel domain
+  ].filter(Boolean),
   credentials: true
 }));
 

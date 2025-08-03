@@ -1,7 +1,7 @@
-// API Configuration - Updated for Netlify + Render deployment
+// API Configuration - Updated for Vercel deployment
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'  // Local development
-  : 'https://friendship-quiz-backend.onrender.com/api';  // Render backend URL
+  : '/api';  // Vercel deployment - same domain
 
 // Global variables
 let currentQuiz = null;

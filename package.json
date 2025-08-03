@@ -14,28 +14,19 @@
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "install:backend": "cd backend && npm install",
     "install:frontend": "cd frontend && npm install",
-    "install:functions": "cd functions && npm install",
     "setup": "npm run install:all && cd backend && cp .env.example .env",
-    "deploy:netlify": "cd frontend && netlify deploy --prod --dir .",
-    "deploy:render": "echo 'Push to GitHub and deploy via Render dashboard'",
-    "deploy:both": "npm run deploy:netlify && npm run deploy:render",
-    "netlify:install": "npm install -g netlify-cli",
-    "netlify:login": "netlify login",
-    "netlify:status": "cd frontend && netlify status",
-    "firebase:init": "firebase init",
-    "firebase:serve": "firebase serve",
-    "firebase:deploy": "firebase deploy",
-    "firebase:deploy:hosting": "firebase deploy --only hosting",
-    "firebase:deploy:functions": "firebase deploy --only functions",
-    "firebase:install": "npm install -g firebase-tools",
-    "firebase:login": "firebase login",
-    "firebase:setup": "npm run install:all && npm run install:functions",
+    "vercel:build": "npm run install:all",
+    "vercel:dev": "vercel dev",
+    "vercel:deploy": "vercel --prod",
+    "vercel:preview": "vercel",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
     "test": "echo 'Tests to be implemented'",
     "lint": "echo 'Linting to be implemented'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/friendship-quiz-app.git"
+    "url": "git+https://github.com/suniaraviraj9107/Friendship.git"
   },
   "keywords": [
     "friendship",
@@ -53,9 +44,9 @@
   "author": "Your Name",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/friendship-quiz-app/issues"
+    "url": "https://github.com/suniaraviraj9107/Friendship/issues"
   },
-  "homepage": "https://github.com/yourusername/friendship-quiz-app#readme",
+  "homepage": "https://github.com/suniaraviraj9107/Friendship#readme",
   "devDependencies": {
     "concurrently": "^8.2.0"
   },
