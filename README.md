@@ -72,20 +72,6 @@ friendship-quiz-app/
 
 ## 🚀 Production Deployment
 
-### Option 1: Vercel (Recommended)
-
-1. **Deploy Backend:**
-   - Push backend to separate repository
-   - Deploy to Vercel/Railway/Heroku
-   - Set environment variables
-
-2. **Deploy Frontend:**
-   - Update API_BASE_URL in script.js
-   - Deploy frontend to Vercel/Netlify
-
-### Option 2: Traditional Hosting
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
 ## 🔒 Security Features
 
