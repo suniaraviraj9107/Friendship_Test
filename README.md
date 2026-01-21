@@ -6,9 +6,6 @@ A comprehensive friendship quiz web application built for Friendship Day celebra
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## 🌟 Live Demo
-- **Live App**: [friendship-quiz-app.vercel.app](https://friendship-quiz-app.vercel.app)
-- **GitHub Repository**: [github.com/suniaraviraj9107/Friendship](https://github.com/suniaraviraj9107/Friendship)
 
 ## ✨ Features
 
